@@ -19,17 +19,11 @@ class BasicAuthPlugin extends MantisPlugin {
                 if (auth_is_user_authenticated())
                         return;
 
-                # REMOTE_USER is domain\username
                 $t_user_id = user_get_id_by_name($_SERVER['REMOTE_USER']);
-
-                # If user has a valid id, log in
                 if ($t_user_id)   {
-                        # Mantis Login
                         user_increment_login_count( $t_user_id );
-
                         user_reset_failed_login_count_to_zero( $t_user_id );
                         user_reset_lost_password_in_progress_count_to_zero( $t_user_id );
-
                         auth_set_cookies($t_user_id, true);
                         auth_set_tokens($t_user_id);
                 }
