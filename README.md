@@ -1,11 +1,11 @@
 # mantis-basic-auth
 BASIC AUTH for Mantis. (experimental)
 
-* add a .htaccess file that takes care of authentication
-* after authentication the $_SERVER variable contains the username 
-of the authenticated user in $_SERVER['REMOTE_USER']
-* this plugin looks up the username and logs the user in
-
+* add a .htaccess file that takes care of authentication.
+* after successfull authentication $_SERVER['REMOTE_USER'] should 
+contain the username of the authenticated user.
+* this plugin checks if the username exists in the mantis user DB 
+and logs the user in.
 
 # Installation
 * copy directory BasicAuth into the plugins directory
