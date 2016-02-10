@@ -12,5 +12,13 @@ of the authenticated user in $_SERVER['REMOTE_USER']
 * login as Administrator and go to Manage > Plugins
 * install the BasicAuth plugin
 
+# Example config_inc.php
+```php
+$g_login_method          = BASIC_AUTH;
+$g_allow_signup          = OFF;
+$g_allow_anonymous_login = OFF;
+$g_anonymous_account     = '';
+```
+
 # Credits
 https://www.mantisbt.org/forums/viewtopic.php?f=4&t=20426

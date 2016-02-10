@@ -16,8 +16,9 @@ class BasicAuthPlugin extends MantisPlugin {
     }
 
     function autologin() {
-        if (auth_is_user_authenticated())
+        if (auth_is_user_authenticated()) {
             return;
+        }
 
         $t_login_method = config_get( 'login_method' );
         if ( $t_login_method != BASIC_AUTH ) {
