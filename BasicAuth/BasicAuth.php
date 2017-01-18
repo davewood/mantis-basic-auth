@@ -8,7 +8,7 @@ class BasicAuthPlugin extends MantisPlugin {
         $this->requires    = array( 'MantisCore' => '1.2.0' );
         $this->author      = 'David Schmidt';
         $this->contact     = 'david.schmidt -at- univie.ac.at';
-        $this->url         = '';
+        $this->url         = 'https://github.com/davewood/mantis-basic-auth';
     }
 
     function init() {
