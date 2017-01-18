@@ -33,7 +33,7 @@ class BasicAuthPlugin extends MantisPlugin {
         $t_remote_user = $_SERVER['REMOTE_USER'];
         $t_user_id     = user_get_id_by_name($t_remote_user);
         if ( !$t_user_id ) {
-            if ( ON == config_get( 'auto_create_remote_user' ) ) {
+            if ( ON == config_get( 'sso_auto_create_remote_user' ) ) {
                 $t_user_id = auth_auto_create_user($t_remote_user, "");
                 if( !$t_user_id ) {
                     trigger_error( "Could not autocreate remote user." );
