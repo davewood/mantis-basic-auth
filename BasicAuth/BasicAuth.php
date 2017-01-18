@@ -1,5 +1,7 @@
 <?php
 
+require_api( 'authentication_api.php');
+
 class BasicAuthPlugin extends MantisPlugin {
     function register() {
         $this->name        = 'BasicAuth Plugin';
@@ -22,7 +24,10 @@ class BasicAuthPlugin extends MantisPlugin {
 
         $t_login_method = config_get( 'login_method' );
         if ( $t_login_method != BASIC_AUTH ) {
-            trigger_error( "Invalid login method. ($t_login_method)", ERROR );
+            trigger_error(
+                "Invalid login method. The BasicAuth plugin requires 'BASIC_AUTH' as login_method. ($t_login_method)",
+                ERROR
+            );
         }
 
         $t_user_id = user_get_id_by_name($_SERVER['REMOTE_USER']);
