@@ -15,6 +15,7 @@ and logs the user in.
 # Example config_inc.php
 ```php
 $g_login_method = BASIC_AUTH;
+$g_auto_create_remote_user = ON; // auto create remote user if it doesn't exist in mantis DB
 $g_allow_signup = OFF;
 ```
 

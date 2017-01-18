@@ -18,10 +18,6 @@ class BasicAuthPlugin extends MantisPlugin {
     }
 
     function autologin() {
-        if (auth_is_user_authenticated()) {
-            return;
-        }
-
         $t_login_method = config_get( 'login_method' );
         if ( $t_login_method != BASIC_AUTH ) {
             trigger_error(
@@ -30,9 +26,22 @@ class BasicAuthPlugin extends MantisPlugin {
             );
         }
 
-        $t_user_id = user_get_id_by_name($_SERVER['REMOTE_USER']);
+        if (auth_is_user_authenticated()) {
+            return;
+        }
+
+        $t_remote_user = $_SERVER['REMOTE_USER'];
+        $t_user_id     = user_get_id_by_name($t_remote_user);
         if ( !$t_user_id ) {
-            trigger_error( 'Invalid user.', ERROR );
+            if ( ON == config_get( 'auto_create_remote_user' ) ) {
+                $t_user_id = auth_auto_create_user($t_remote_user, "");
+                if( !$t_user_id ) {
+                    trigger_error( "Could not autocreate remote user." );
+                }
+            }
+            else {
+                trigger_error( 'Invalid user. Perhaps you want to allow auto creation of remote users', ERROR );
+            }
         }
 
         user_increment_login_count( $t_user_id );
