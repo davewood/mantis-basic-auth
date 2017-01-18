@@ -30,17 +30,26 @@ class BasicAuthPlugin extends MantisPlugin {
             return;
         }
 
-        $t_remote_user = $_SERVER['REMOTE_USER'];
-        $t_user_id     = user_get_id_by_name($t_remote_user);
+        $t_sso_usr_regex = config_get( 'sso_user_regex' );
+        $t_remote_user   = $_SERVER['REMOTE_USER'];
+        if ( $t_sso_usr_regex ) {
+            preg_match($t_sso_usr_regex, $t_remote_user, $user_match);
+            $t_username = $user_match[1];
+        }
+        else {
+            $t_username = $t_remote_user;
+        }
+
+        $t_user_id = user_get_id_by_name($t_username);
         if ( !$t_user_id ) {
             if ( ON == config_get( 'sso_auto_create_remote_user' ) ) {
-                $t_user_id = auth_auto_create_user($t_remote_user, "");
+                $t_user_id = auth_auto_create_user($t_username, "");
                 if( !$t_user_id ) {
                     trigger_error( "Could not autocreate remote user." );
                 }
             }
             else {
-                trigger_error( 'Invalid user. Perhaps you want to allow auto creation of remote users', ERROR );
+                trigger_error( 'Invalid user. ('. $t_username .') Perhaps you want to allow auto creation of remote users', ERROR );
             }
         }
 
