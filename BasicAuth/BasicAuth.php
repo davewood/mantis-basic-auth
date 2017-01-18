@@ -5,7 +5,7 @@ class BasicAuthPlugin extends MantisPlugin {
         $this->name        = 'BasicAuth Plugin';
         $this->description = 'Looks for REMOTE_USER in SERVER environment and autologins user.';
         $this->version     = '0.01';
-        $this->requires    = array( 'MantisCore' => '1.2.0' );
+        $this->requires    = array( 'MantisCore' => '1.2.0, <1.3.99' );
         $this->author      = 'David Schmidt';
         $this->contact     = 'david.schmidt -at- univie.ac.at';
         $this->url         = 'https://github.com/davewood/mantis-basic-auth';
