@@ -1,5 +1,5 @@
 # mantis-basic-auth
-BASIC AUTH for Mantis. (experimental)
+BASIC AUTH for Mantis.
 
 * add a .htaccess file that takes care of authentication.
 * after successfull authentication $_SERVER['REMOTE_USER'] should 
@@ -14,10 +14,8 @@ and logs the user in.
 
 # Example config_inc.php
 ```php
-$g_login_method          = BASIC_AUTH;
-$g_allow_signup          = OFF;
-$g_allow_anonymous_login = OFF;
-$g_anonymous_account     = '';
+$g_login_method = BASIC_AUTH;
+$g_allow_signup = OFF;
 ```
 
 # Credits
